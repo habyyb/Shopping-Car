@@ -1,1 +1,18 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Deploy') {
+            steps {
+                script {
+                    // Here, deploy your application
+                    echo 'Deploying application...'
+                    withDockerRegistry(credentialsId: 'docker-hub-credentials', toolName: 'Docker') {
+                        sh "docker run -d -p 8070:8070 habib1234/shopping-cart:latest"
+                    }
+                }
+            }
+        }
+    }
+}
 
